@@ -1,12 +1,11 @@
 package com.jsp.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -25,4 +24,8 @@ public class Product {
     private String companyName;
     private LocalDate dateOfExpiry;
     private String description;
+
+    // One product can have many purchases
+    @OneToMany(mappedBy = "product")
+    private List<Purchase> purchases;
 }

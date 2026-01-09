@@ -20,4 +20,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> dataIntegrityViolationException(DataIntegrityViolationException d){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(d.getMessage());
     }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<String> productNotFoundException(ProductNotFoundException p){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(p.getMessage());
+    }
 }
