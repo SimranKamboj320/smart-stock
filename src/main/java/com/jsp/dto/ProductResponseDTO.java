@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductResponseDTO {
+
     private String productName;
     private Double price;
     private String category;

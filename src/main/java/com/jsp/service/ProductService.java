@@ -31,7 +31,4 @@ public interface ProductService {
 
     // to purchase a product
 
-
-
-
 }
