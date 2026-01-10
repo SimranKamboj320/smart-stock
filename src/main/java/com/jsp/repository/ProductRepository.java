@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ProjectRepository extends JpaRepository<Product,Integer> {
+public interface ProductRepository extends JpaRepository<Product,Integer> {
 
     List<Product> findByCompanyName(String companyName);
 
