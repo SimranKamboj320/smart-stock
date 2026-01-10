@@ -18,16 +18,16 @@ public interface ProductService {
    List<ProductResponseDTO> findByCompanyName(String companyName);
 
    // to find product by color
-    List<ProductResponseDTO> findByColor(String color);
+   List<ProductResponseDTO> findByColor(String color);
 
    // to update a product details
-    ProductResponseDTO update(int productId, ProductRequestDTO dto);
+   ProductResponseDTO update(int productId, ProductRequestDTO dto);
 
-    // get all product 5 at a time
+    // get n product  at a time (that's why use pagination)
     Page<ProductResponseDTO> findAllProduct(Pageable pageable);
 
     // to delete a product
-    void delete(String productId);
+    void delete(int productId);
 
     // to purchase a product
 
