@@ -18,8 +18,8 @@ import java.util.List;
 public class ProductServiceImplementation implements ProductService {
     @Autowired
     private ProductRepository productRepository;
-    // map dto to entity
 
+    // map dto to entity
     public Product mapToEntity(ProductRequestDTO dto){
         Product p=new Product();
         p.setProductName(dto.getProductName());
@@ -31,6 +31,7 @@ public class ProductServiceImplementation implements ProductService {
         p.setDescription(dto.getDescription());
         return p;
     }
+
     // map entity to dto
     public ProductResponseDTO mapToDto(Product p){
         ProductResponseDTO dto=new ProductResponseDTO();
@@ -47,6 +48,7 @@ public class ProductServiceImplementation implements ProductService {
     public Page<ProductResponseDTO> mapToDto(Page<Product> products){
         return products.map(this::mapToDto);
     }
+
     @Override
     public ProductResponseDTO save(ProductRequestDTO dto){
         Product product=mapToEntity(dto);
@@ -55,9 +57,9 @@ public class ProductServiceImplementation implements ProductService {
 
     @Override
     public ProductResponseDTO findByProductId(int id){
-
         return mapToDto(productRepository.findById(id).orElseThrow(()-> new ProductNotFoundException("Product not found by given Id.")));
     }
+
     @Override
     public List<ProductResponseDTO> findByCompanyName(String companyName){
         return productRepository.findByCompanyName(companyName)

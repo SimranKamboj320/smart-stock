@@ -4,6 +4,7 @@ import com.jsp.dto.UserRequestDTO;
 import com.jsp.dto.UserResponseDTO;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface UserService {
 
@@ -11,13 +12,13 @@ public interface UserService {
     UserResponseDTO save(UserRequestDTO dto);
 
     //to search a user by id
-    UserResponseDTO findByUserId(int id);
+    UserResponseDTO findByUserId(int userId);
 
     //to find phoneNumber of a user
-    UserResponseDTO findByphoneNum(long phoneNumber);
+    List<UserResponseDTO> findByPhoneNum(long phoneNumber);
 
     //to find user by email
-    UserResponseDTO findByEmail(String email);
+    List<UserResponseDTO> findByUserEmail(String email);
 
     //to update user dob
     UserResponseDTO updateDOB(int userId, LocalDate dob);
