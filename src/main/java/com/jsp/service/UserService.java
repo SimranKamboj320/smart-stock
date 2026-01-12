@@ -29,6 +29,6 @@ public interface UserService {
     //to update user address
     UserResponseDTO updateAddress(int userId, String address);
 
-    //
+    //to update user
     UserResponseDTO update(int userId, UserRequestDTO dto);
 }
