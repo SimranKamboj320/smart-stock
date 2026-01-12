@@ -27,5 +27,5 @@ public class Product {
 
     // One product can have many purchases
     @OneToMany(mappedBy = "product")
-    private List<Purchase> purchases;
+    private List<Order> purchases;
 }
