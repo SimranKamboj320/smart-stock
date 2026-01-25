@@ -25,4 +25,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> productNotFoundException(ProductNotFoundException p){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(p.getMessage());
     }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> resourceNotFoundException(ResourceNotFoundException r){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(r.getMessage());
+    }
 }

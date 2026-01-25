@@ -1,12 +1,8 @@
 package com.jsp.service.impl;
 
-import com.jsp.dto.ProductRequestDTO;
-import com.jsp.dto.ProductResponseDTO;
 import com.jsp.dto.UserRequestDTO;
 import com.jsp.dto.UserResponseDTO;
-import com.jsp.entity.Product;
-import com.jsp.entity.User;
-import com.jsp.exception.ProductNotFoundException;
+import com.jsp.entity.AppUser;
 import com.jsp.exception.UserNotFoundException;
 import com.jsp.repository.UserRepository;
 import com.jsp.service.UserService;
@@ -24,8 +20,8 @@ public class UserServiceImplementation implements UserService{
     private UserRepository userRepository;
 
     //map dto to entity
-    public User mapToEntity(UserRequestDTO userDto){
-        User u = new User();
+    public AppUser mapToEntity(UserRequestDTO userDto){
+        AppUser u = new AppUser();
         u.setName(userDto.getName());
         u.setPhoneNo(userDto.getPhoneNo());
         u.setEmail(userDto.getEmail());
@@ -36,7 +32,7 @@ public class UserServiceImplementation implements UserService{
     }
 
     //map entity to dto
-    public UserResponseDTO mapToDto(User u){
+    public UserResponseDTO mapToDto(AppUser u){
         UserResponseDTO dto = new UserResponseDTO();
         dto.setName(u.getName());
         dto.setPhoneNo(u.getPhoneNo());
@@ -47,13 +43,13 @@ public class UserServiceImplementation implements UserService{
         return dto;
     }
 
-    public Page<UserResponseDTO> mapToDto(Page<User> users){
+    public Page<UserResponseDTO> mapToDto(Page<AppUser> users){
         return users.map(this::mapToDto);
     }
 
     @Override
     public UserResponseDTO save(UserRequestDTO dto){
-        User user = mapToEntity(dto);
+        AppUser user = mapToEntity(dto);
         return mapToDto(userRepository.save(user));
     }
 
@@ -80,21 +76,21 @@ public class UserServiceImplementation implements UserService{
 
     @Override
     public UserResponseDTO updateDOB(int userId, LocalDate dob){
-        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist"));
+        AppUser user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist"));
         user.setDob(dob);
 
         return mapToDto(userRepository.save(user));
     }
 
     public UserResponseDTO updateGender(int userId, String gender){
-        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist"));
+        AppUser user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist"));
         user.setGender(gender);
 
         return mapToDto(userRepository.save(user));
     }
 
     public UserResponseDTO updateAddress(int userId, String address){
-        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist"));
+        AppUser user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist"));
         user.setAddress(address);
 
         return mapToDto(userRepository.save(user));
@@ -103,7 +99,7 @@ public class UserServiceImplementation implements UserService{
     @Override
     @Transactional
     public UserResponseDTO update(int userId, UserRequestDTO dto){
-        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist."));
+        AppUser user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist."));
         user.setName(dto.getName());
         user.setPhoneNo(dto.getPhoneNo());
         user.setEmail(dto.getEmail());

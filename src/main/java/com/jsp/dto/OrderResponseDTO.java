@@ -11,15 +11,15 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class OrderResponseDTO {
 
-    private int orderId;
+    //private int orderId;
     private int productCount;
     private LocalDate orderDate;
     private Double totalAmount;
     private String status;
     private String type;
     // User info
-    private int userId;
-    private String userName;
+    //private int userId;
+    //private String userName;
 
     // Order items summary
 
