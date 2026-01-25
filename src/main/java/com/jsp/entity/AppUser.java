@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 
-public class User {
+public class AppUser {
     @Id
     private int userId;
     private String name;
