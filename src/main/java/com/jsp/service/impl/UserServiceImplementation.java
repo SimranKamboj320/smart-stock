@@ -49,8 +49,8 @@ public class UserServiceImplementation implements UserService{
 
     @Override
     public UserResponseDTO save(UserRequestDTO dto){
-        AppUser user = mapToEntity(dto);
-        return mapToDto(userRepository.save(user));
+        AppUser appUser = mapToEntity(dto);
+        return mapToDto(userRepository.save(appUser));
     }
 
     @Override
@@ -76,37 +76,37 @@ public class UserServiceImplementation implements UserService{
 
     @Override
     public UserResponseDTO updateDOB(int userId, LocalDate dob){
-        AppUser user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist"));
-        user.setDob(dob);
+        AppUser appUser = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist"));
+        appUser.setDob(dob);
 
-        return mapToDto(userRepository.save(user));
+        return mapToDto(userRepository.save(appUser));
     }
 
     public UserResponseDTO updateGender(int userId, String gender){
-        AppUser user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist"));
-        user.setGender(gender);
+        AppUser appUser = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist"));
+        appUser.setGender(gender);
 
-        return mapToDto(userRepository.save(user));
+        return mapToDto(userRepository.save(appUser));
     }
 
     public UserResponseDTO updateAddress(int userId, String address){
-        AppUser user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist"));
-        user.setAddress(address);
+        AppUser appUser = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist"));
+        appUser.setAddress(address);
 
-        return mapToDto(userRepository.save(user));
+        return mapToDto(userRepository.save(appUser));
     }
 
     @Override
     @Transactional
     public UserResponseDTO update(int userId, UserRequestDTO dto){
-        AppUser user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist."));
-        user.setName(dto.getName());
-        user.setPhoneNo(dto.getPhoneNo());
-        user.setEmail(dto.getEmail());
-        user.setDob(dto.getDob());
-        user.setGender(dto.getGender());
-        user.setAddress(dto.getAddress());
+        AppUser appUser = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist."));
+        appUser.setName(dto.getName());
+        appUser.setPhoneNo(dto.getPhoneNo());
+        appUser.setEmail(dto.getEmail());
+        appUser.setDob(dto.getDob());
+        appUser.setGender(dto.getGender());
+        appUser.setAddress(dto.getAddress());
 
-        return mapToDto(userRepository.save(user));
+        return mapToDto(userRepository.save(appUser));
     }
 }

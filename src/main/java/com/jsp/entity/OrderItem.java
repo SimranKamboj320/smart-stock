@@ -6,24 +6,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Order {
+public class OrderItem {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderId;
+    private long orderId;
 
-    private LocalDate orderDate;
-    private Double totalAmount;
-    private String status;
-    private String type;
+    private int quantity;
+    private double price;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private AppUser appUser;
+    private Order order;
+
 }
