@@ -22,5 +22,5 @@ public class AppUser {
     private String gender;
     private String address;
     private String password;
-//    private String role;
+    private String role;
 }

@@ -8,16 +8,16 @@ import java.util.List;
 public interface OrderService {
 
     // to place order
-    //OrderResponseDTO createOrder();
+    OrderResponseDTO createOrder();
 
     // for admin
     OrderResponseDTO getOrderById(int orderId);
 
     // When user login then user can see their all order
-    //List<OrderResponseDTO> getAllMyOrder(Pageable pageable);
+    List<OrderResponseDTO> getAllMyOrder(Pageable pageable);
 
     // admin can see all order
-    //List<OrderResponseDTO> getAllOrders(Pageable pageable);
+    List<OrderResponseDTO> getAllOrders(Pageable pageable);
 
     // for admin to update order status
     OrderResponseDTO updateOrderStatus(int orderId,String status);
