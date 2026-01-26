@@ -1,14 +1,25 @@
 package com.jsp.service;
 
 import com.jsp.entity.OrderItem;
+import jakarta.persistence.ManyToOne;
+import org.apache.catalina.User;
 
 import java.util.List;
-
 public interface OrderItemService {
 
-    //to save orderItem
-//    OrderItem findByOrderId(long orderId);
-//    OrderItem addItemToCart(int productId, int quantity);
-//    List<OrderItem> findByOrderItemId(long orderId);
-//    void deleteOrderItem(long orderItemId);
+    //Add product to cart (or increase quantity if already exists)
+    OrderItem addItemToCart(int productItem, int quantity);
+
+    //Remove a single item from cart
+    void removeItemFromCart(long orderItemId);
+
+    //Update quantity of an existing cart item
+    OrderItem updateItemQuantity(long orderItemId, int quantity);
+
+    //view all cart items of logged-in user
+    List<OrderItem> getOrderItemsUser(int userId);
+
+    //Clear cart after order is placed
+    void clearOrderItemsForUser(int userId);
+
 }
