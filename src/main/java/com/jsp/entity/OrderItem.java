@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.catalina.User;
 
 @Setter
 @Getter
@@ -25,7 +24,7 @@ public class OrderItem {
 
     // Many cart items belong to one user
     @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
+    private AppUser user;
 
     // Many order items refer to one product
     @ManyToOne(fetch = FetchType.EAGER)

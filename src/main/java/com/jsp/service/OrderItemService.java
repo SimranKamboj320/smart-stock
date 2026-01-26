@@ -17,9 +17,8 @@ public interface OrderItemService {
     OrderItem updateItemQuantity(long orderItemId, int quantity);
 
     //view all cart items of logged-in user
-    List<OrderItem> getOrderItemsUser(int userId);
+    List<OrderItem> getOrderItemsForUser(int userId);
 
     //Clear cart after order is placed
     void clearOrderItemsForUser(int userId);
-
 }

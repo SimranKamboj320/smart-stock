@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class OrderResponseDTO {
 
-    //private int orderId;
+    private long orderId;
     private int productCount;
     private LocalDate orderDate;
     private Double totalAmount;

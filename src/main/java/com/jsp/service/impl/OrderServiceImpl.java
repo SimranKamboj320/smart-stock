@@ -7,18 +7,15 @@ import com.jsp.entity.Product;
 import com.jsp.entity.OrderItem;
 import com.jsp.exception.ResourceNotFoundException;
 import com.jsp.exception.UserNotFoundException;
-import com.jsp.repository.OrderItemRepository;
 import com.jsp.repository.OrderRepository;
+import com.jsp.repository.ProductRepository;
 import com.jsp.repository.UserRepository;
 import com.jsp.service.OrderItemService;
 import com.jsp.service.OrderService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -29,13 +26,15 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderService {
 
     private final UserRepository userRepository;
-    private final OrderItemRepository orderItemRepository;
+    //private final OrderItemRepository orderItemRepository;
     private final OrderItemService orderItemService;
+    private final ProductRepository productRepository;
+    private final OrderRepository orderRepository;
 
     // mapper for entity to dto
     private OrderResponseDTO entityToDTO(Order order){
         OrderResponseDTO dto=new OrderResponseDTO();
-        //dto.setProductCount(order.ge);
+        dto.setOrderId(order.getOrderId());
         dto.setOrderDate(order.getOrderDate());
         dto.setTotalAmount(order.getTotalAmount());
         dto.setStatus(order.getStatus());
@@ -44,14 +43,20 @@ public class OrderServiceImpl implements OrderService {
         return dto;
     }
 
-    private final OrderRepository orderRepository;
+
     @Autowired
-    public OrderServiceImpl(UserRepository userRepository, OrderRepository orderRepository,OrderItemRepository orderItemRepository,OrderItemService orderItemService){
+    public OrderServiceImpl(UserRepository userRepository,
+                            OrderRepository orderRepository,
+                            OrderItemService orderItemService,
+                            ProductRepository productRepository)
+    {
         this.userRepository = userRepository;
         this.orderRepository=orderRepository;
-        this.orderItemRepository=orderItemRepository;
+
         this.orderItemService=orderItemService;
+        this.productRepository=productRepository;
     }
+
     @Override
     @Transactional
     public OrderResponseDTO createOrder() {
@@ -68,7 +73,7 @@ public class OrderServiceImpl implements OrderService {
 
         // 2. Fetch cart items
         List<OrderItem> items =
-                orderItemService.getOrderItemsForUser(user.getId());
+                orderItemService.getOrderItemsForUser(user.getUserId());
 
         if (items.isEmpty()) {
             throw new RuntimeException("Cart is empty");
@@ -113,7 +118,7 @@ public class OrderServiceImpl implements OrderService {
         Order savedOrder = orderRepository.save(order);
 
         // 6. Clear cart
-        orderItemService.clearOrderItemsForUser(user.getId());
+        orderItemService.clearOrderItemsForUser(user.getUserId());
 
         return entityToDTO(savedOrder);
     }
