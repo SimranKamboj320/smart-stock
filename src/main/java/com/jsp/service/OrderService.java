@@ -20,5 +20,5 @@ public interface OrderService {
     List<OrderResponseDTO> getAllOrders(Pageable pageable);
 
     // for admin to update order status
-    OrderResponseDTO updateOrderStatus(int orderId,String status);
+    OrderResponseDTO updateOrderStatus(int orderId, String status);
 }

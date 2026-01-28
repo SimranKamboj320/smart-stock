@@ -4,11 +4,13 @@ import com.jsp.dto.UserRequestDTO;
 import com.jsp.dto.UserResponseDTO;
 import com.jsp.entity.AppUser;
 import com.jsp.exception.UserNotFoundException;
+import com.jsp.repository.ProductRepository;
 import com.jsp.repository.UserRepository;
 import com.jsp.service.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,6 +20,8 @@ import java.util.List;
 public class UserServiceImplementation implements UserService{
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
     //map dto to entity
     public AppUser mapToEntity(UserRequestDTO userDto){
@@ -45,6 +49,11 @@ public class UserServiceImplementation implements UserService{
 
     public Page<UserResponseDTO> mapToDto(Page<AppUser> users){
         return users.map(this::mapToDto);
+    }
+
+    @Override
+    public Page<AppUser> findAllUser(Pageable pageable){
+        return userRepository.findAll(pageable);
     }
 
     @Override
