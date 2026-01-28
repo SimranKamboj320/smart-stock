@@ -13,13 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
+    private final AuthenticationManager authenticationManager;
+    @Autowired
+    public AuthController(AuthenticationManager authenticationManager){
+        this.authenticationManager=authenticationManager;
+    }
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginDTO dto){
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword());
         authenticationManager.authenticate(authToken);
-        return ResponseEntity.ok("Login successfull");
+        return ResponseEntity.ok("Login successful.");
     }
 }

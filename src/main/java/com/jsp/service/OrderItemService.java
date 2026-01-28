@@ -1,8 +1,7 @@
 package com.jsp.service;
 
 import com.jsp.entity.OrderItem;
-import jakarta.persistence.ManyToOne;
-import org.apache.catalina.User;
+
 
 import java.util.List;
 public interface OrderItemService {

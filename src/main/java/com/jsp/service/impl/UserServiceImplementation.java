@@ -9,6 +9,7 @@ import com.jsp.service.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ import java.util.List;
 public class UserServiceImplementation implements UserService{
     @Autowired
     private UserRepository userRepository;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     //map dto to entity
@@ -112,5 +114,9 @@ public class UserServiceImplementation implements UserService{
         appUser.setAddress(dto.getAddress());
 
         return mapToDto(userRepository.save(appUser));
+    }
+
+    public Page<UserResponseDTO> findAllUser(Pageable pageable){
+        return mapToDto(userRepository.findAll(pageable));
     }
 }

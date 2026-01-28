@@ -1,7 +1,6 @@
 package com.jsp.controller;
 
-import com.jsp.dto.ProductRequestDTO;
-import com.jsp.dto.ProductResponseDTO;
+
 import com.jsp.dto.UserRequestDTO;
 import com.jsp.dto.UserResponseDTO;
 import com.jsp.service.UserService;
@@ -16,7 +15,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService){
