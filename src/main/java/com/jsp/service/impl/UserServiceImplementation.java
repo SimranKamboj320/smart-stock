@@ -9,6 +9,7 @@ import com.jsp.service.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ import java.util.List;
 public class UserServiceImplementation implements UserService{
     @Autowired
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     //map dto to entity
     public AppUser mapToEntity(UserRequestDTO userDto){
@@ -25,6 +27,8 @@ public class UserServiceImplementation implements UserService{
         u.setName(userDto.getName());
         u.setPhoneNo(userDto.getPhoneNo());
         u.setEmail(userDto.getEmail());
+        // so that password save in encoded(hash) format
+        u.setPassword(passwordEncoder.encode(userDto.getPassword()));
         u.setDob(userDto.getDob());
         u.setGender(userDto.getGender());
         u.setAddress(userDto.getAddress());
