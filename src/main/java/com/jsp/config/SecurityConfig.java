@@ -1,4 +1,3 @@
-
 package com.jsp.config;
 
 import com.jsp.entity.AppUser;
@@ -21,7 +20,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
 
     private final CustomUserDetailsService customUserDetailsService;
 
@@ -47,11 +45,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/auth/**"
-
                         ).permitAll()
                         // USER only
                         .requestMatchers("/product/purchase/**").hasRole("USER")
-
 
                         //ADMIN only
                         .requestMatchers("purchase/update/",
@@ -80,5 +76,4 @@ public class SecurityConfig {
             }
         };
     }
-
 }
